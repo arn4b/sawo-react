@@ -3,7 +3,7 @@ import './App.css';
 import SawoLogin from 'sawo-react'
 import Sawo from "sawo"
 import React, { useEffect } from 'react';
-
+import env from "react-dotenv";
 
 function App() {
 
@@ -14,7 +14,7 @@ function App() {
 //         // can be one of 'email' or 'phone_number_sms'
 //         identifierType: 'email',
 //         // Add the API key copied from 5th step
-//         apiKey: "b48e0838-0022-4dc3-87c2-c2dae749a0eb",
+//         apiKey: "process.env.REACT_APP_API_KEY",
 //         // Add a callback here to handle the payload sent by sdk
 //         onSuccess: payload => {
 //             console.log(payload)
@@ -32,7 +32,7 @@ function sawoLoginCallback(payload) {
 const sawoConfig = {
   onSuccess: sawoLoginCallback, //required,
   identifierType: 'email', //required, must be one of: 'email', 'phone_number_sms',
-  apiKey: 'b48e0838-0022-4dc3-87c2-c2dae749a0eb', // required, get it from sawo dev.sawolabs.com,
+  apiKey: process.env.REACT_APP_API_KEY, // required, get it from sawo dev.sawolabs.com,
   containerHeight: '20rem', // the login container height, default is 230px
 }
 
