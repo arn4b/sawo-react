@@ -2,10 +2,13 @@ import logo from './logo.svg';
 import './App.css';
 import SawoLogin from 'sawo-react'
 import Sawo from "sawo"
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import env from "react-dotenv";
 
 function App() {
+
+  const [isUserLoggedIn, setUserLoggedIn] = useState(false)
+  const [payload, setPayload] = useState({})
 
 //   useEffect(() => {
 //     var config = {
@@ -27,6 +30,9 @@ function App() {
 
 function sawoLoginCallback(payload) {
   console.log(payload)
+  console.log("Payload:" + JSON.stringify(payload))
+  setUserLoggedIn(true)
+  setPayload(payload)
 }
 
 const sawoConfig = {
@@ -41,7 +47,13 @@ const sawoConfig = {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         {/* <div id="sawo-container" style={{'height': '300px'}}></div> */}
+
+        {!isUserLoggedIn
+        ?
         <SawoLogin config={sawoConfig}/>
+        :
+        <div>Hello {payload.identifier}</div>
+        }
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
